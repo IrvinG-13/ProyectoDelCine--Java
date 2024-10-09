@@ -2,11 +2,15 @@ import java.util.Scanner;
  
 class Persona{
     //atributos
-    private int edad;
+    private boolean jubilado;
 
     //Getters
-    public int getEdad(int edad){
-        return edad;
+    public boolean getJubilado(){
+        return jubilado;
+    }
+
+    public void setJubilado(boolean jubilado) {
+        this.jubilado = jubilado;
     }
 }
 
@@ -21,7 +25,7 @@ class Carrito{
     //constructor
     public Carrito(){       
         this.precio = 0.0;
-        //this.descuento = descuento;
+        this.descuento = 0.0;
         //this.lista = lista;
         this.factura = 0.0;
         //this.code = code;
@@ -85,6 +89,11 @@ class Carrito{
         
     }
 
+    public double getDescuentoJubilado(){
+        descuento = factura * 0.20 ;
+        return descuento;
+    }
+
     public double getTotalFactura(){
         return factura;
     }
@@ -115,8 +124,14 @@ public class Tienda{
         System.out.println("12.Agua ($1.50)");
 
         Carrito carrito = new Carrito();
+        Persona persona = new Persona();
+        
+        System.out.println("Es usted Jubilado? (s/n)");
+        String respuestaJubilado = sc.nextLine();
+        persona.setJubilado(respuestaJubilado.equalsIgnoreCase("s"));
 
-        do { 
+        do {
+
             System.out.print("\n Codigo del proucto?");
             int code = sc.nextInt();
 
@@ -137,7 +152,7 @@ public class Tienda{
         } while (respuesta.equalsIgnoreCase("s"));
         
 
-
+        System.out.println("El descuento de su compra es :" + carrito.getDescuentoJubilado());
         System.out.println("Su factura final es: $" + carrito.getTotalFactura());
 
         sc.close();
