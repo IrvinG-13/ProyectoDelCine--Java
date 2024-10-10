@@ -17,61 +17,78 @@ class Persona{
 class Carrito{
     //atributos
     private double precio;
-    //private int code;
-    private String lista;
     private double descuento;
     private double factura;
+    private double popcorn;
+    private double refresco;
+    private double agua;
+    private double hotdog;
+    private double chocolate;
 
     //constructor
     public Carrito(){       
         this.precio = 0.0;
         this.descuento = 0.0;
-        //this.lista = lista;
         this.factura = 0.0;
-        //this.code = code;
+        
+        
     }
-    
+    //Metodos
     public void menu(int code){
 
         switch(code){
             case 1:
             precio = 4.50;
-            
+            popcorn += 2.00;
+            refresco += 2.50;
             break;
                 
             case 2:
             precio = 5.00;
+            hotdog += 2.50;
+            refresco += 2.50;
             break;
 
             case 3:
             precio = 6.80;
+            popcorn += 2.80;
+            refresco += 4.00;
             break;
             case 4:
             precio = 1.25;
+            popcorn += 1.25;
             break;
             case 5:
             precio = 2.00;
+            popcorn += 2.00;
             break;
             case 6:
             precio = 3.00;
+            popcorn += 3.00;
             break;
             case 7:
             precio = 2.50;
+            hotdog += 2.50;
             break;
             case 8:
             precio = 1.75;
+            chocolate += 1.75;
             break;
             case 9:
             precio = 1.30;
+            refresco += 1.30;
             break;
             case 10:
             precio= 2.00;
+            refresco += 2.00;
             break;
             case 11:
             precio = 2.75;
+            refresco += 2.75;
             break;
             case 12:
             precio = 1.50;
+            agua += 1.50;
             break;
             default:
             System.out.println("Codigo Invalido");
@@ -92,6 +109,22 @@ class Carrito{
     public double getDescuentoJubilado(){
         descuento = factura * 0.20 ;
         return descuento;
+    }
+
+    public String calcularPorcentage(){
+        double popcornTotal = (popcorn / factura) * 100;
+        double hotdogTotal = (hotdog / factura) * 100;
+        double refrescoTotal = (refresco / factura) * 100;
+        double aguaTotal = (agua / factura) * 100;
+        double chocolateTotal = (chocolate / factura) * 100;
+        
+        return "Popcorn: " + popcornTotal + "%\n" +
+           "Hotdog: " + hotdogTotal + "%\n" +
+           "Refresco: " + refrescoTotal + "%\n" +
+           "Agua: " + aguaTotal + "%\n" +
+           "Chocolate: " + chocolateTotal + "%\n";
+        
+
     }
 
     public double getTotalFactura(){
@@ -150,10 +183,19 @@ public class Tienda{
             System.out.println("Desea Continuar?(s/n)");
             respuesta = sc.nextLine();
         } while (respuesta.equalsIgnoreCase("s"));
+
+        
         
 
-        System.out.println("El descuento de su compra es :" + carrito.getDescuentoJubilado());
-        System.out.println("Su factura final es: $" + carrito.getTotalFactura());
+        if (persona.getJubilado()) {
+            double descuento = carrito.getDescuentoJubilado();
+            System.out.println("Descuento de Jubilado: $" + descuento);
+            System.out.println("Su factura final con descuento es: $" + (carrito.getTotalFactura() - descuento));
+        } else {
+            System.out.println("Su factura final es: $" + carrito.getTotalFactura());
+        }
+
+        System.out.println("Porcentages :"+ carrito.calcularPorcentage());
 
         sc.close();
     }
