@@ -203,7 +203,7 @@ public class Tienda{
                 }
         
                 //codigo  para refrescos
-                if (code >= 9 && code <= 11) {
+                if (code >= 9 && code <= 10) {
                     System.out.println("¿Desea agrandar el refresco? (s/n)");
                     agrandarRefresco = sc.nextLine().equalsIgnoreCase("s");
         
